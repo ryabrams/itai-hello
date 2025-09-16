@@ -47,9 +47,84 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-KCR52VXG');</script>
 <!-- End Google Tag Manager -->
 
-    <!-- UTM Platform Tracking Pixel -->
+<!-- UTM Platform Tracking Pixel -->
 <script>
-!function(){try{var c={w:'L7YQ4tN7D7XgtnA4zPrH',e:'http://localhost:5173/api/track',d:true},s=sessionStorage,g=function(k){var v=s.getItem(k);return v||(v='utm_'+Math.random().toString(36).substr(2,9)+'_'+Date.now(),s.setItem(k,v)),v},p=new URLSearchParams(location.search),u={},h=0;['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);v&&(u[k]=v,h=1)});if(h){var a=navigator.userAgent||'',d=c.d?{device:/Mobile|Android|iPhone|iPad/.test(a)?/iPad/.test(a)?'tablet':'mobile':'desktop',browser:/Chrome/.test(a)?'Chrome':/Firefox/.test(a)?'Firefox':/Safari/.test(a)?'Safari':/Edge/.test(a)?'Edge':'Unknown',os:/Windows/.test(a)?'Windows':/Mac/.test(a)?'macOS':/Linux/.test(a)?'Linux':/Android/.test(a)?'Android':/iOS/.test(a)?'iOS':'Unknown'}:{},t=Object.assign({workspaceId:c.w,url:location.href,referrer:document.referrer||'',userAgent:a,sessionId:g('utm_session_id'),timestamp:new Date().toISOString()},u,d);(navigator.sendBeacon?navigator.sendBeacon(c.e,JSON.stringify(t)):fetch(c.e,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(t),keepalive:!0}).catch(console.warn))||console.warn}}catch(e){console.warn('UTM tracking failed:',e)}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',arguments.callee):arguments.callee()}();
+!function(){try{
+  // Firebase configuration
+  var fbConfig={"projectId":"utm-dev-5704c","apiKey":"AIzaSyCH5lrBH1g3Fq4E0obqKNA_HvXEg1Oa2KI","authDomain":"utm-dev-5704c.firebaseapp.com"};
+  var workspaceId='L7YQ4tN7D7XgtnA4zPrH';
+  var collectDeviceData=true;
+
+  // Utility functions
+  var s=sessionStorage,g=function(k){var v=s.getItem(k);return v||(v='utm_'+Math.random().toString(36).substr(2,9)+'_'+Date.now(),s.setItem(k,v)),v};
+
+  // Check for UTM parameters
+  var p=new URLSearchParams(location.search),u={},h=0;
+  ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
+    var v=p.get(k);v&&(u[k]=v,h=1);
+  });
+
+  if(h){
+    // Device detection
+    var a=navigator.userAgent||'',d=collectDeviceData?{
+      device:/Mobile|Android|iPhone|iPad/.test(a)?/iPad/.test(a)?'tablet':'mobile':'desktop',
+      browser:/Chrome/.test(a)?'Chrome':/Firefox/.test(a)?'Firefox':/Safari/.test(a)?'Safari':/Edge/.test(a)?'Edge':'Unknown',
+      os:/Windows/.test(a)?'Windows':/Mac/.test(a)?'macOS':/Linux/.test(a)?'Linux':/Android/.test(a)?'Android':/iOS/.test(a)?'iOS':'Unknown'
+    }:{};
+
+    // Prepare tracking data
+    var trackingData=Object.assign({
+      workspaceId:workspaceId,
+      url:location.href,
+      referrer:document.referrer||'',
+      userAgent:a,
+      sessionId:g('utm_session_id'),
+      timestamp:new Date().toISOString(),
+      source:'tracking_pixel'
+    },u,d);
+
+    // Direct Firestore write using REST API
+    var firestoreUrl='https://firestore.googleapis.com/v1/projects/'+fbConfig.projectId+'/databases/(default)/documents/analytics';
+    var firestoreData={
+      fields:{
+        workspaceId:{stringValue:trackingData.workspaceId},
+        url:{stringValue:trackingData.url},
+        referrer:{stringValue:trackingData.referrer},
+        userAgent:{stringValue:trackingData.userAgent},
+        sessionId:{stringValue:trackingData.sessionId},
+        timestamp:{timestampValue:new Date().toISOString()},
+        source:{stringValue:'tracking_pixel'}
+      }
+    };
+
+    // Add UTM fields if present
+    if(u.utm_source)firestoreData.fields.utmSource={stringValue:u.utm_source};
+    if(u.utm_medium)firestoreData.fields.utmMedium={stringValue:u.utm_medium};
+    if(u.utm_campaign)firestoreData.fields.utmCampaign={stringValue:u.utm_campaign};
+    if(u.utm_term)firestoreData.fields.utmTerm={stringValue:u.utm_term};
+    if(u.utm_content)firestoreData.fields.utmContent={stringValue:u.utm_content};
+
+    // Add device data if collected
+    if(collectDeviceData && d.device)firestoreData.fields.device={stringValue:d.device};
+    if(collectDeviceData && d.browser)firestoreData.fields.browser={stringValue:d.browser};
+    if(collectDeviceData && d.os)firestoreData.fields.os={stringValue:d.os};
+
+    // Send to Firestore
+    var requestUrl=firestoreUrl+'?key='+fbConfig.apiKey;
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(requestUrl,JSON.stringify(firestoreData));
+    }else{
+      fetch(requestUrl,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(firestoreData),
+        keepalive:true
+      }).catch(function(e){console.warn('UTM tracking failed:',e)});
+    }
+  }
+}catch(e){console.warn('UTM tracking failed:',e)}
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',arguments.callee):arguments.callee();
+}();
 </script><!-- End UTM Platform Tracking Pixel -->
   </head>
 
