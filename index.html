@@ -46,6 +46,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KCR52VXG');</script>
 <!-- End Google Tag Manager -->
+
+    <!-- UTM Platform Tracking Pixel -->
+<script>
+!function(){try{var c={w:'L7YQ4tN7D7XgtnA4zPrH',e:'http://localhost:5173/api/track',d:true},s=sessionStorage,g=function(k){var v=s.getItem(k);return v||(v='utm_'+Math.random().toString(36).substr(2,9)+'_'+Date.now(),s.setItem(k,v)),v},p=new URLSearchParams(location.search),u={},h=0;['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){var v=p.get(k);v&&(u[k]=v,h=1)});if(h){var a=navigator.userAgent||'',d=c.d?{device:/Mobile|Android|iPhone|iPad/.test(a)?/iPad/.test(a)?'tablet':'mobile':'desktop',browser:/Chrome/.test(a)?'Chrome':/Firefox/.test(a)?'Firefox':/Safari/.test(a)?'Safari':/Edge/.test(a)?'Edge':'Unknown',os:/Windows/.test(a)?'Windows':/Mac/.test(a)?'macOS':/Linux/.test(a)?'Linux':/Android/.test(a)?'Android':/iOS/.test(a)?'iOS':'Unknown'}:{},t=Object.assign({workspaceId:c.w,url:location.href,referrer:document.referrer||'',userAgent:a,sessionId:g('utm_session_id'),timestamp:new Date().toISOString()},u,d);(navigator.sendBeacon?navigator.sendBeacon(c.e,JSON.stringify(t)):fetch(c.e,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(t),keepalive:!0}).catch(console.warn))||console.warn}}catch(e){console.warn('UTM tracking failed:',e)}document.readyState==='loading'?document.addEventListener('DOMContentLoaded',arguments.callee):arguments.callee()}();
+</script><!-- End UTM Platform Tracking Pixel -->
   </head>
 
 <body>
