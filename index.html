@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-
 <!-- 
   To change the theme, change the class on the html tag below to one of:
   - theme-auto: Automatically switches based on user's system preferences
   - theme-light: Forces light theme
   - theme-dark: Forces dark theme
 -->
-
 <html class="theme-light" lang="en"> <!-- Update`class="theme-auto" with your preference -->
-
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KCR52VXG');</script>
+<!-- End Google Tag Manager -->
         
     <!-- Page Title - Change this to your name/brand (50-60 characters recommended) -->
     <title>Connect with Me</title>
@@ -38,96 +42,7 @@
     <!-- <link rel="stylesheet" href="css/brands-extended.css"> -->
     <!-- Learn more at https://github.com/sethcottle/littlelink-extended. 
          Remove comments if you've added LittleLink Extended dependencies -->
-
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KCR52VXG');</script>
-<!-- End Google Tag Manager -->
-
-<!-- UTM Platform Tracking Pixel -->
-<script>
-!function(){try{
-  // Firebase configuration
-  var fbConfig={"projectId":"utm-dev-5704c","apiKey":"AIzaSyCH5lrBH1g3Fq4E0obqKNA_HvXEg1Oa2KI","authDomain":"utm-dev-5704c.firebaseapp.com"};
-  var workspaceId='L7YQ4tN7D7XgtnA4zPrH';
-  var collectDeviceData=true;
-
-  // Utility functions
-  var s=sessionStorage,g=function(k){var v=s.getItem(k);return v||(v='utm_'+Math.random().toString(36).substr(2,9)+'_'+Date.now(),s.setItem(k,v)),v};
-
-  // Check for UTM parameters
-  var p=new URLSearchParams(location.search),u={},h=0;
-  ['utm_source','utm_medium','utm_campaign','utm_term','utm_content'].forEach(function(k){
-    var v=p.get(k);v&&(u[k]=v,h=1);
-  });
-
-  if(h){
-    // Device detection
-    var a=navigator.userAgent||'',d=collectDeviceData?{
-      device:/Mobile|Android|iPhone|iPad/.test(a)?/iPad/.test(a)?'tablet':'mobile':'desktop',
-      browser:/Chrome/.test(a)?'Chrome':/Firefox/.test(a)?'Firefox':/Safari/.test(a)?'Safari':/Edge/.test(a)?'Edge':'Unknown',
-      os:/Windows/.test(a)?'Windows':/Mac/.test(a)?'macOS':/Linux/.test(a)?'Linux':/Android/.test(a)?'Android':/iOS/.test(a)?'iOS':'Unknown'
-    }:{};
-
-    // Prepare tracking data
-    var trackingData=Object.assign({
-      workspaceId:workspaceId,
-      url:location.href,
-      referrer:document.referrer||'',
-      userAgent:a,
-      sessionId:g('utm_session_id'),
-      timestamp:new Date().toISOString(),
-      source:'tracking_pixel'
-    },u,d);
-
-    // Direct Firestore write using REST API
-    var firestoreUrl='https://firestore.googleapis.com/v1/projects/'+fbConfig.projectId+'/databases/(default)/documents/analytics';
-    var firestoreData={
-      fields:{
-        workspaceId:{stringValue:trackingData.workspaceId},
-        url:{stringValue:trackingData.url},
-        referrer:{stringValue:trackingData.referrer},
-        userAgent:{stringValue:trackingData.userAgent},
-        sessionId:{stringValue:trackingData.sessionId},
-        timestamp:{timestampValue:new Date().toISOString()},
-        source:{stringValue:'tracking_pixel'}
-      }
-    };
-
-    // Add UTM fields if present
-    if(u.utm_source)firestoreData.fields.utmSource={stringValue:u.utm_source};
-    if(u.utm_medium)firestoreData.fields.utmMedium={stringValue:u.utm_medium};
-    if(u.utm_campaign)firestoreData.fields.utmCampaign={stringValue:u.utm_campaign};
-    if(u.utm_term)firestoreData.fields.utmTerm={stringValue:u.utm_term};
-    if(u.utm_content)firestoreData.fields.utmContent={stringValue:u.utm_content};
-
-    // Add device data if collected
-    if(collectDeviceData && d.device)firestoreData.fields.device={stringValue:d.device};
-    if(collectDeviceData && d.browser)firestoreData.fields.browser={stringValue:d.browser};
-    if(collectDeviceData && d.os)firestoreData.fields.os={stringValue:d.os};
-
-    // Send to Firestore
-    var requestUrl=firestoreUrl+'?key='+fbConfig.apiKey;
-    if(navigator.sendBeacon){
-      navigator.sendBeacon(requestUrl,JSON.stringify(firestoreData));
-    }else{
-      fetch(requestUrl,{
-        method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify(firestoreData),
-        keepalive:true
-      }).catch(function(e){console.warn('UTM tracking failed:',e)});
-    }
-  }
-}catch(e){console.warn('UTM tracking failed:',e)}
-document.readyState==='loading'?document.addEventListener('DOMContentLoaded',arguments.callee):arguments.callee();
-}();
-</script><!-- End UTM Platform Tracking Pixel -->
   </head>
-
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCR52VXG"
